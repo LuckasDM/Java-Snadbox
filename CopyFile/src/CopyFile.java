@@ -15,8 +15,6 @@ public class CopyFile {
 
 	public static void main(String[] args) throws IOException {
 		int i;
-		FileInputStream fin = null;
-		FileOutputStream fout = null;
 		
 		// First, make sure that both files has been specified.
 		if (args.length != 2) {
@@ -24,11 +22,10 @@ public class CopyFile {
 			return;
 		}
 		
-		// Copy a File.
-		try {
-			// Attempt to open the files.
-			fin = new FileInputStream(args[0]);
-			fout = new FileOutputStream(args[1]);
+		// Open and manage two files via the try statement.
+		try (	FileInputStream fin = new FileInputStream(args[0]);
+				FileOutputStream fout = new FileOutputStream(args[1]))
+		{
 			
 			do {
 				i = fin.read();
@@ -36,17 +33,6 @@ public class CopyFile {
 			} while (i != -1);
 		} catch (IOException exc) {
 			System.out.println("I/O Error: " + exc);
-		} finally {
-			try {
-				if(fin != null) fin.close();
-			} catch (IOException exc) {
-				System.out.println("Error Closing Input File");
-			}
-			try {
-				if(fout != null) fout.close();
-			} catch (IOException exc) {
-				System.out.println("Error Closing Output File");
-			}
 		}
 	}
 }
