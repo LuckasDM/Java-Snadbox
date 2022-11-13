@@ -23,7 +23,8 @@ public class ShowFile {
 		
 		try {
 			fin = new FileInputStream(args[0]);
-		}catch (FileNotFoundException exc) {
+		}
+		catch (FileNotFoundException exc) {
 			System.out.println("File Not Found");
 			return;
 		}
